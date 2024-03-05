@@ -17,9 +17,8 @@ const listingSchema = mongoose.Schema(
             maxLength:1000
         },
         image:{
-            type: String,
-            set:(v)=>v===""?link:v,
-            
+            url:String,
+            filename:String  
         },
         price:{
             type:Number,

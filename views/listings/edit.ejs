@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-8 offset-2">
   <h3>Edit your Listing details</h3>
-  <form action="/listings/<%=listing._id%>?_method=PUT" method="post" novalidate class="needs-validation">
+  <form action="/listings/<%=listing._id%>?_method=PUT" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
       <input
@@ -33,16 +33,17 @@
       <div class="valid-feedback">Description looks good</div>
       <div class="invalid-feedback">Please enter a good description</div>
     </div>
-    <div class="mb-3">
-      <label for="image" class="form-label">Image URL</label>
+    <div class="mb-3" >
+      <p>Original Listing Image</p>
+      <img src="<%=originalUrl%>" alt="original image" style="height: 15%; width: 30%;">
+    </div>
+    <div class="mb-3" >
+      <label for="image" class="form-label">Upload New Image</label>
       <input
-        type="text"
+        type="file"
         name="listing[image]"
-        placeholder="enter image URL/Link"
         id="image"
         class="form-control"
-        value="<%=listing.image%>"
-        required
       />
       <div class="valid-feedback">URL looks good</div>
       <div class="invalid-feedback">Please enter a valid image URL</div>
