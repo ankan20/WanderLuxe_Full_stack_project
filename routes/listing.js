@@ -34,7 +34,7 @@ router
     validateListing,
     wrapAsync(listingController.updateListing)
   )
-  .delete(isLoggedIn, isOwner, wrapAsync(listingController.deleteListing));
+  .delete(isLoggedIn, isOwner,wrapAsync(listingController.deleteListing));
 
 //Update route
 router.get(
