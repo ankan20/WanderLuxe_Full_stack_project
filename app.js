@@ -82,7 +82,7 @@ main()
   });
 
 app.get("/", (req, res) => {
-  res.send("CLICK ON EXPLORE !");
+  res.render("home.ejs");
 });
 
 app.use((req, res, next) => {
