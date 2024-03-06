@@ -81,9 +81,9 @@ main()
     console.log(err);
   });
 
-// app.get("/", (req, res) => {
-//   res.send("Home route");
-// });
+app.get("/", (req, res) => {
+  res.send("CLICK ON EXPLORE !");
+});
 
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
