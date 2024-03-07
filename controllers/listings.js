@@ -10,21 +10,22 @@ module.exports.index = async (req, res) => {
     if(query === "trending"){
       allListings = await Listing.find({});
     }
-    else if(query){
+    else if (query) {
+      const validCategories = ["mountains", "arctic", "castles", "amazing pools", "farms", "camping", "rooms", "iconic cities", "domes", "boats"];
+    
       allListings = await Listing.find({
         $or: [
           { title: { $regex: query, $options: 'i' } }, // Match title
-          { category: { $regex: query, $options: 'i' } }, // Match category
           { location: { $regex: query, $options: 'i' } }, // Match location
-          { country: { $regex: query, $options: 'i' } } // Match country
+          { country: { $regex: query, $options: 'i' } }, // Match country
+          { category: { $in: validCategories, $regex: query, $options: 'i' } } // Match category with valid categories
         ]
       });
-      
     }
     else {
       allListings = await Listing.find({});
     }
-
+    console.log(allListings)
     res.render("listings/index.ejs", { allListings });
   }
 
