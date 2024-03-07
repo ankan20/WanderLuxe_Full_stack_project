@@ -81,9 +81,7 @@ main()
     console.log(err);
   });
 
-app.get("/", (req, res) => {
-  res.render("home.ejs");
-});
+
 
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
@@ -92,15 +90,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.get("/demouser",async (req,res)=>{
-//   let fakeUser = new User({
-//     email : "student@gmail.com",
-//     username : "random-user"
-//   })
+app.get("/", (req, res) => {
+  res.render("home.ejs");
+});
 
-//   let registeredUser = await User.register(fakeUser,"random-password");
-//   res.send(registeredUser);
-// })
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
