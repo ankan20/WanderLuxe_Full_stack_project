@@ -39,57 +39,59 @@
 
     <div id="filters">
 
-      <div class="filter">
+      <div class="filter" id="trending">
         <div><i class="fa-solid fa-fire"></i></div>
         <p>Trending</p>
       </div>
-
-      <div class="filter">
+    
+      <div class="filter" id="rooms">
         <div><i class="fa-solid fa-bed"></i></div>
         <p>Rooms</p>
       </div>
-
-      <div class="filter">
+    
+      <div class="filter" id="iconic-cities">
         <div><i class="fa-solid fa-mountain-city"></i></div>
         <p>Iconic cities</p>
       </div>
-
-      <div class="filter">
+    
+      <div class="filter" id="mountains">
         <div><i class="fa-solid fa-mountain-sun"></i></div>
         <p>Mountains</p>
       </div>
-
-      <div class="filter">
+    
+      <div class="filter" id="castles">
         <div><i class="fa-brands fa-fort-awesome"></i></div>
         <p>Castles</p>
       </div>
-
-      <div class="filter">
+    
+      <div class="filter" id="amazing-pools">
         <div><i class="fa-solid fa-person-swimming"></i></div>
         <p>Amazing Pools</p>
       </div>
-
-      <div class="filter">
+    
+      <div class="filter" id="camping">
         <div><i class="fa-solid fa-campground"></i></div>
         <p>Camping</p>
       </div>
-      <div class="filter">
+    
+      <div class="filter" id="farms">
         <div><i class="fa-solid fa-cow"></i></div>
         <p>Farms</p>
       </div>
-      <div class="filter">
+    
+      <div class="filter" id="arctic">
         <div><i class="fa-solid fa-person-snowboarding"></i></div>
-        <p>Arctic </p>
+        <p>Arctic</p>
       </div>
-
-      <div class="filter">
+    
+      <div class="filter" id="domes">
         <div><i class="fa-solid fa-igloo"></i></div>
         <p>Domes</p>
       </div>
-
-      <div class="filter">
+    
+      <div class="filter" id="boats">
         <div><i class="fa-solid fa-sailboat"></i></div>
-        <p>Boats </p>
+        <p>Boats</p>
       </div>
 
       <div class="tax-toggle">
@@ -104,6 +106,9 @@
 
 
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 all-listing-card">
+      <% if (allListings.length === 0) { %>
+    <p>No listings found.</p>
+  <% } else { %>
         <% for (let list of allListings){ %>
             <a href="/listings/<%=list._id%>" style="width: 25rem;" >
             <div class="card col listing-card " style="width: 25rem;">
@@ -119,6 +124,7 @@
                 </div>
               </div>
             </a>
+              <% } %>
               <% } %>
     </div>
 
@@ -136,4 +142,18 @@
       
     }
   })
+
+  document.addEventListener("DOMContentLoaded", () => {
+  const filters = document.querySelectorAll(".filter");
+
+  filters.forEach(filter => {
+    filter.addEventListener("click", () => {
+      const filterType = filter.id;
+      // Perform filtering based on the filter type
+      // Redirect to a URL with a query parameter indicating the filter type
+      window.location.href = `/listings?q=${filterType}`;
+    });
+  });
+});
+
 </script>

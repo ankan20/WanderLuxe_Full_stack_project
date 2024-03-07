@@ -4,7 +4,27 @@ const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 const wrapAsync = require("../utils/wrapAsync.js");
 module.exports.index = async (req, res) => {
-    const allListings = await Listing.find({});
+    let query = req.query.q;
+    //console.log(query)
+    let allListings = [];
+    if(query === "trending"){
+      allListings = await Listing.find({});
+    }
+    else if(query){
+      allListings = await Listing.find({
+        $or: [
+          { title: { $regex: query, $options: 'i' } }, // Match title
+          { category: { $regex: query, $options: 'i' } }, // Match category
+          { location: { $regex: query, $options: 'i' } }, // Match location
+          { country: { $regex: query, $options: 'i' } } // Match country
+        ]
+      });
+      
+    }
+    else {
+      allListings = await Listing.find({});
+    }
+
     res.render("listings/index.ejs", { allListings });
   }
 
@@ -45,7 +65,7 @@ module.exports.createListing = async (req, res, next) => {
   newListing.image = {url,filename};
   newListing.geometry = response.body.features[0].geometry;
   let savedListing = await newListing.save();
-  console.log(savedListing)
+  //console.log(savedListing)
   req.flash("success", "New Listing Created");
   res.redirect("/listings");
 }
