@@ -110,6 +110,7 @@ body {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
   }
+
 }
 
 .new-listing label {
@@ -141,4 +142,11 @@ body {
   height: 400px;
   width: 80vh;
 }
-
+@media only screen and (max-width: 600px) {
+  #map {
+    height: 400px;
+    /* width: 100%; */
+    max-width: 350px;
+  }
+ 
+}
