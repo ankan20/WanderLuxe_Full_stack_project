@@ -25,7 +25,6 @@ module.exports.index = async (req, res) => {
     else {
       allListings = await Listing.find({});
     }
-    console.log(allListings)
     res.render("listings/index.ejs", { allListings });
   }
 
